@@ -1,4 +1,4 @@
-function q = modularity(W,ci)
+function q = quality_modularity(W,ci)
 %MODULARITY      Compute modularity of a vertex partition on a binary network.
 %
 %

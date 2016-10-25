@@ -1,4 +1,4 @@
-function [w, pars] = wonder(W, ci)
+function [w, pars] = quality_wonder(W, ci)
 %WONDER      Compute wonder of a vertex partition on a binary network.
 %
 %

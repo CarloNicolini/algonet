@@ -3,3 +3,4 @@ function y=xlogx(x)
 		y=zeros(size(x));
 	end
 	y = x.*log(x);
+	y(isnan(y))=0;

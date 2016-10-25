@@ -1,4 +1,4 @@
-function S = significance(A, ci)
+function S = quality_significance(A, ci)
 %SIGNIFICANCE      Compute significance of a vertex partition on a binary network.
 %
 %

@@ -1,4 +1,4 @@
-function [p,KTot,Kin] = surprisal(A,ci)
+function [p,KTot,Kin] = quality_surprisal(A,ci)
 
 [B,C,KTot,n,m,p] = comm_mat(A,ci);
 ncomm = size(B,1);

@@ -1,4 +1,4 @@
-function q = asymptotic_modularity(W,ci)
+function q = quality_asymptotic_modularity(W,ci)
 %ASYMPTOTIC_MODULARITY      Compute the asymptotic modularity of a vertex partition on a binary network.
 %
 %   Inputs:      W,  undirected weighted or unweighted network.

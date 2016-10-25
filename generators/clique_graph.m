@@ -1,4 +1,4 @@
-function A=clique(n)
+function A=clique_graph(n)
 %CLIQUE Returns adjacency matrix of a clique graph with n nodes
 %
 %   Inputs: n, the number of nodes of the graph

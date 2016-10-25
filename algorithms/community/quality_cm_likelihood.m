@@ -1,4 +1,4 @@
-function logScm = cm_likelihood(A,Ci)
+function logScm = quality_cm_likelihood(A,Ci)
 	[B,C,K,n,m,p,Bnorm,commsizes] = comm_mat(A,Ci);
 
 	k=degrees_und(A);

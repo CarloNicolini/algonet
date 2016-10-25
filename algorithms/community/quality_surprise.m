@@ -1,4 +1,4 @@
-function [S] = surprise(A, ci)
+function [S] = quality_surprise(A, ci)
 %SURPRISE      Compute surprise of a vertex partition on a binary network.
 %
 %
