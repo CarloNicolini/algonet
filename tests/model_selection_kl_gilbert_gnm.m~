@@ -1,0 +1,47 @@
+clear all;
+N=20;
+nedges=100;
+A = randomGraph(N,[],nedges);
+TOLBETA=1E-16;
+% estimate beta such that it's the smallest such that S>0
+S=[];
+invbetas=logspace(-5,5,1000);
+for invbeta=invbetas
+    beta=1.0/invbeta;
+    S = [S, quantum_entropy(A,beta)/log2(N)];
+end
+subplot(2,2,1);
+semilogx(invbetas,S,'o-'); title('$S(\beta)$','Interpreter','LaTex'); xlabel('1/beta'); ylabel('$S/\log2(N)$','Interpreter','LaTex');
+subplot(2,2,2);
+plot(invbetas(1:end-1),diff(S)); title('$\Delta S(\beta)$','Interpreter','LaTex'); xlabel('$1/\beta$','Interpreter','LaTex'); ylabel('$\Delta S/\log2(N)$','Interpreter','LaTex');
+%betastar = 1.0/min(invbetas(find(S>0.005))); % see dedomenico, page 7, first paragraph
+betastar = 1.0/min(invbetas(find(diff(S)>TOLBETA)));
+betastar=1;
+rho=quantum_density(A,betastar);
+
+RES.edges=[];
+RES.rep=[];
+RES.kl = [];
+for edges=1:(N*(N-1)/2)
+   for repetition=1:100
+        kl = quantum_kl(rho,quantum_density(randomGraph(N,[],edges),betastar));
+        RES.edges = [RES.edges; edges];
+        RES.rep = [RES.rep; repetition];
+        RES.kl = [RES.kl; real(kl)];
+   end
+end
+
+
+T=struct2table(RES);
+Tm=varfun(@mean,T,'InputVariables',{'kl'},'GroupingVariables',{'edges'})
+subplot(2,2,3);
+plot(Tm.edges,Tm.mean_kl,'.','MarkerFace','k'); grid on; xlabel('NEdges'); ylabel('KL Div','Interpreter','LaTex');
+
+% Return the corresponding estimated plink
+edgestar = Tm.edges(find(min(Tm.mean_kl)==Tm.mean_kl));
+
+% The network loglikelihood is
+sigmastar = quantum_density(randomGraph(N,edgestar),betastar);
+trace(rho*logm(sigmastar))
+
+[nedges, edgestar]
