@@ -1,17 +1,18 @@
 clear all;
-N=50;
-pobs=0.55;
+N=100;
+pobs=0.2;
 A = randomGraph(N,pobs);
 
 % estimate beta such that 
 S=[];
-invbetas=logspace(-3,4,1000);
+invbetas=logspace(-5,5,1000);
 for invbeta=invbetas
     beta=1.0/invbeta;
     S = [S, quantum_entropy(A,beta)/log2(N)];
 end
 semilogx(invbetas,S,'o-');
-betastar = 1.0/min(invbetas(find(S>0.01))); % see dedomenico, page 7, first paragraph
+tolerance=1E-2;
+betastar = 1.0/min(invbetas(find(S>tolerance))); % see dedomenico, page 7, first paragraph
 
 rho=quantum_density(A,betastar);
 
