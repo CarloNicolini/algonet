@@ -49,8 +49,8 @@ adj=zeros(n); % initialize adjacency matrix
 % k_out = p_out*(n-n/c) => p_out = pc(n-1)/(n(r+1)(c-1))
 
 
-p_in = r*p*c*(n-1)/((r+1)*(n-c));
-p_out = p*c*(n-1)/(n*(r+1)*(c-1));
+p_out = r*p*c*(n-1)/((r+1)*(n-c));
+p_in = p*c*(n-1)/(n*(r+1)*(c-1));
 
 
 for i=1:n
