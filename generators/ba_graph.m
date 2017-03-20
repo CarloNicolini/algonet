@@ -52,6 +52,6 @@ end
 edges = edges(1:2*nEdges);
 first = edges(1:2:end);
 second = edges(2:2:end);
-A = sparse([first;second], [second;first], ones(2*nEdges, 1), n, n);
+A = full(sparse([first;second], [second;first], ones(2*nEdges, 1), n, n));
 
 end % scale_free(...)

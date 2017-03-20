@@ -15,8 +15,8 @@ function [adj, modules] = randomModularGraphPinPout(n,c,p_in,p_out, labels)
 
 % n - number of nodes
 % c - number of clusters/modules
-% p - overall probability of attachment
-% r - proportion of links within modules
+% p_in - intracluster probability of attachment
+% p_out - intercluster probability of attachment
 % labels - pre-specified cluster assignments
 
 % assign nodes to modules: 1 -> n/c, n/c+1 -> 2n/c, ... , (c-1)n/c -> c(n/c);
@@ -38,8 +38,7 @@ elseif nargin==5
     modules = {};
     for k=1:c; modules{k}= md(k,1):md(k,2); end
 end
-    
-    
+
 adj=zeros(n); % initialize adjacency matrix
 
 % DERIVATION of probabilities
@@ -48,24 +47,16 @@ adj=zeros(n); % initialize adjacency matrix
 % k_in = p_in*(n/c-1) => p_in = rpc(n-1)/((r+1)(n-c))
 % k_out = p_out*(n-n/c) => p_out = pc(n-1)/(n(r+1)(c-1))
 
-
-
 for i=1:n
-  for j=i+1:n
-        
-      module_i=ceil(c*i/n);   % the module to which i belongs to
-      module_j=ceil(c*j/n);   % the module to which j belongs to
-        
-      if module_i==module_j
-        
-        % prob of attachment within module
-        if rand<p_in; adj(i,j)=1; adj(j,i)=1; end
-        
-      else
-      
-        % prob of attachment across modules
-        if rand<p_out; adj(i,j)=1; adj(j,i)=1; end
-        
-      end
-  end
+    for j=i+1:n
+        module_i=ceil(c*i/n);   % the module to which i belongs to
+        module_j=ceil(c*j/n);   % the module to which j belongs to
+        if module_i==module_j
+            % prob of attachment within module
+            if rand<p_in; adj(i,j)=1; adj(j,i)=1; end
+        else
+            % prob of attachment across modules
+            if rand<p_out; adj(i,j)=1; adj(j,i)=1; end
+        end
+    end
 end
