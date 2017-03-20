@@ -3,7 +3,6 @@ function wishart_permutation_test(W, ci, df, nperms)
 % ci is the membership (n nodes with integer labels)
 % df is the number of degrees of freedom
 % nperms is the number of random permutations
-
 for c=sort(unique(ci))
     nodes_c = find(ci==c);
     W(nodes_c,nodes_c)
