@@ -40,6 +40,4 @@ switch nargin   % number of function arguments
     if i==j || adj(i,j)>0; continue; end  % do not allow self-loops or double edges
     adj(i,j)=adj(i,j)+1; adj(j,i)=adj(i,j);
   end
-    
- 
 end

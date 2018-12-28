@@ -33,7 +33,7 @@ while sum(stubs)>0   % while no more stubs are left to connect
     if length(ind) == 2;  elr = rewireThisEdge([el; ind(1) ind(2) 1; ind(2) ind(1) 1],ind(1),ind(2)); end
     
     if length(ind)>2 || isempty(elr)           % restart algorithm
-      printf('randomGraphFromDegreeSequence(): restarting ...\n')
+      fprintf('randomGraphFromDegreeSequence(): restarting ...\n')
       stubs = Nseq;
       adj = zeros(length(Nseq));
       old_sum = 0;
